@@ -29,7 +29,6 @@ func main() {
 		redisServer = RedisServer
 	}
 
-	database := os.Getenv("REDIS_DATABASE")
 	password := os.Getenv("REDIS_PASSWORD")
 
 	workers.Configure(map[string]string{
@@ -39,7 +38,6 @@ func main() {
 		"pool": fmt.Sprintf("%s", RedisConnections),
 		// unique process id for this instance of workers (for proper recovery of inprogress jobs on crash)
 		"process":  ProcessId,
-		"database": database,
 		"password": password,
 	})
 
