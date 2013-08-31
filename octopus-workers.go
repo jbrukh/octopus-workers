@@ -48,10 +48,4 @@ func main() {
 
 func sentipusWorker(args *workers.Args) {
 	log.Printf("received message: %v", args)
-	// algo, err := args.Get("algorithm").String()
-	// if err != nil {
-	//  log.Printf("there was an error: %v", err)
-	// } else {
-	//  fmt.Printf("got algorithm: %s", algo)
-	// }
 }
