@@ -1,0 +1,1 @@
+worker: octopus-workers
