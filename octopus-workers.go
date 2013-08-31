@@ -16,10 +16,10 @@ import (
 
 const (
 	RedisServer      = "localhost:6379"
-	RedisConnections = 4
+	RedisConnections = 2
 	ProcessId        = "1"
 	ProcessingQueue  = "sentipus-queue"
-	Concurrency      = 4
+	Concurrency      = 2
 	StatsServerPort  = 8888
 )
 
@@ -30,6 +30,10 @@ func main() {
 	}
 
 	password := os.Getenv("REDIS_PASSWORD")
+
+	log.Printf("Starting up")
+	log.Printf("SERVER: %s", redisServer)
+	log.Printf("PASSWORD: %s", password)
 
 	workers.Configure(map[string]string{
 		// location of redis instance
