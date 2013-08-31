@@ -44,6 +44,7 @@ func main() {
 
 	workers.Process(ProcessingQueue, sentipusWorker, Concurrency)
 	workers.Run()
+
 }
 
 func sentipusWorker(args *workers.Args) {
