@@ -36,19 +36,13 @@ func main() {
 	log.Printf("PASSWORD: %s", password)
 
 	workers.Configure(map[string]string{
-		// location of redis instance
-		"server": redisServer,
-		// number of connections to keep open with redis
-		"pool": fmt.Sprintf("%s", RedisConnections),
-		// unique process id for this instance of workers (for proper recovery of inprogress jobs on crash)
+		"server":   redisServer,
+		"pool":     fmt.Sprintf("%s", RedisConnections),
 		"process":  ProcessId,
 		"password": password,
 	})
 
-	// pull messages from "myqueue" with concurrency of 10
 	workers.Process(ProcessingQueue, sentipusWorker, Concurrency)
-
-	// Blocks until process is told to exit via unix signal
 	workers.Run()
 }
 
