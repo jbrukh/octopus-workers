@@ -48,9 +48,6 @@ func main() {
 	// pull messages from "myqueue" with concurrency of 10
 	workers.Process(ProcessingQueue, sentipusWorker, Concurrency)
 
-	// stats will be available at http://localhost:8080/stats
-	go workers.StatsServer(StatsServerPort)
-
 	// Blocks until process is told to exit via unix signal
 	workers.Run()
 }
