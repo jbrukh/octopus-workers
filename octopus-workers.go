@@ -29,13 +29,18 @@ func main() {
 		redisServer = RedisServer
 	}
 
+	database := os.Getenv("REDIS_DATABASE")
+	password := os.Getenv("REDIS_PASSWORD")
+
 	workers.Configure(map[string]string{
 		// location of redis instance
 		"server": redisServer,
 		// number of connections to keep open with redis
 		"pool": fmt.Sprintf("%s", RedisConnections),
 		// unique process id for this instance of workers (for proper recovery of inprogress jobs on crash)
-		"process": ProcessId,
+		"process":  ProcessId,
+		"database": database,
+		"password": password,
 	})
 
 	// pull messages from "myqueue" with concurrency of 10
