@@ -15,7 +15,7 @@ import (
 
 const (
 	RedisServer      = "localhost:6379"
-	RedisConnections = 30
+	RedisConnections = 4
 	ProcessId        = "1"
 	ProcessingQueue  = "sentipus-queue"
 	Concurrency      = 4
