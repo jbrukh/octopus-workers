@@ -4,19 +4,18 @@
 package algo
 
 import (
-	"github.com/jbrukh/goavatar/formats"
 	"fmt"
+	"github.com/jbrukh/goavatar/formats"
 )
 
-type FftAlgo struct {}
+type FftAlgo struct{}
 
 func (a *FftAlgo) AlgoId() string {
 	return "fft"
 }
 
-func (a *FftAlgo) Process(args *Args) (err error) {
+func (a *FftAlgo) Process(args Args) (err error) {
 	r, _ := formats.NewOBFReader(nil)
 	fmt.Println(r)
 	return
 }
-

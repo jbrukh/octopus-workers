@@ -10,6 +10,6 @@ func (a *AverageAlgo) AlgoId() string {
 	return "average"
 }
 
-func (a *AverageAlgo) Process(args *Args) (err error) {
+func (a *AverageAlgo) Process(args Args) (err error) {
 	return
 }

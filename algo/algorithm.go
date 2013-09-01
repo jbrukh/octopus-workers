@@ -8,10 +8,10 @@ import (
 )
 
 // Args is a wrapper around simplejson
-type Args simplejson.Json
+type Args *simplejson.Json
 
 // An algorithm
 type Algorithm interface {
 	AlgoId() string
-	Process(args *Args) (err error)
+	Process(args Args) (err error)
 }
