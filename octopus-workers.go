@@ -5,7 +5,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/jonnii/go-workers"
+	"github.com/jrallison/go-workers"
 	"log"
 	"os"
 )
