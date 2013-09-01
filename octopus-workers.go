@@ -45,21 +45,27 @@ func main() {
 
 	workers.Middleware.Append(&workers.MiddlewareLogging{})
 
-	workers.Process(ProcessingQueue, sentipusWorker, Concurrency)
+	workers.Process(ProcessingQueue, RunOctopusWorker, Concurrency)
 	workers.Run()
 }
 
-func sentipusWorker(args *workers.Args) {
-	log.Printf("received message: %v", args)
+func RunOctopusWorker(args *workers.Args) {
+	log.Printf("received message: %s", args.ToJson())
 
-	algoId, err := args.Get("algo_id").String()
+	a1 := args.GetIndex(0)
+	if a1 == nil {
+		log.Printf("Couldn't extract the first item of the args array")
+		return
+	}
+
+	algoId, err := a1.Get("algo_id").String()
 	if err != nil {
 		log.Print("Couldn't find a key in the worker request with name 'algo_id'")
 		return
 	}
 
-	a := args.Get("args")
-	if a != nil {
+	a := a1.Get("args")
+	if a == nil {
 		log.Printf("Couldn't find a key in the worker request with the name 'args'")
 		return
 	}

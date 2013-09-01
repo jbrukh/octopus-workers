@@ -8,9 +8,10 @@ import (
 )
 
 // Available algorithms.
-var algorithms = map[string]Algorithm {
-	"fft": new(FftAlgo),
+var algorithms = map[string]Algorithm{
+	"fft":     new(FftAlgo),
 	"average": new(AverageAlgo),
+	"null":    new(NullAlgo),
 }
 
 // Provide an algorithm by id.
@@ -22,4 +23,3 @@ func Provide(algoId string) (algo Algorithm, err error) {
 	}
 	return
 }
-
