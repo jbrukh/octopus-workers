@@ -3,26 +3,15 @@
 //
 package algo
 
-type AlgoSpec struct {
-	resourceIds []string          `json: "resource_ids"`
-	algoId      string            `json: "algo_id"`
-	args        map[string]string `json: "args"`
-}
+import (
+	"github.com/bitly/go-simplejson"
+)
 
-func (a *AlgoSpec) ResourceIds() []string {
-	return a.resourceIds
-}
-
-func (a *AlgoSpec) AlgoId() string {
-	return a.algoId
-}
-
-func (a *AlgoSpec) Args() map[string]string {
-	return a.args
-}
+// Args is a wrapper around simplejson
+type Args simplejson.Json
 
 // An algorithm
 type Algorithm interface {
 	AlgoId() string
-	Process(resourceIds []string, args map[string]string)
+	Process(args *Args) (err error)
 }

@@ -3,10 +3,13 @@
 //
 package algo
 
-type AverageAlgo struct {
-	AlgoSpec
+// AverageAlgo
+type AverageAlgo struct{}
+
+func (a *AverageAlgo) AlgoId() string {
+	return "average"
 }
 
-func (a *AverageAlgo) Process(resourceIds []string, args map[string]string) {
-
+func (a *AverageAlgo) Process(args *Args) (err error) {
+	return
 }

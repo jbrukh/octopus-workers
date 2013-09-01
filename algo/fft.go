@@ -3,6 +3,13 @@
 //
 package algo
 
-type FftAlgo struct {
-	AlgoSpec
+type FftAlgo struct {}
+
+func (a *FftAlgo) AlgoId() string {
+	return "fft"
 }
+
+func (a *FftAlgo) Process(args *Args) (err error) {
+	return
+}
+
