@@ -16,5 +16,4 @@ func main() {
 		usage()
 		os.Exit(1)
 	}
-
 }

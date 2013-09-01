@@ -3,6 +3,11 @@
 //
 package algo
 
+import (
+	"github.com/jbrukh/goavatar/formats"
+	"fmt"
+)
+
 type FftAlgo struct {}
 
 func (a *FftAlgo) AlgoId() string {
@@ -10,6 +15,8 @@ func (a *FftAlgo) AlgoId() string {
 }
 
 func (a *FftAlgo) Process(args *Args) (err error) {
+	r, _ := formats.NewOBFReader(nil)
+	fmt.Println(r)
 	return
 }
 
