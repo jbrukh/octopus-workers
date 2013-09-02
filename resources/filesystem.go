@@ -1,6 +1,7 @@
 package resources
 
 import (
+	"io"
 	"os"
 )
 

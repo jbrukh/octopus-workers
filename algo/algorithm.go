@@ -8,10 +8,12 @@ import (
 )
 
 // Args is a wrapper around simplejson
-type Args *simplejson.Json
+type Args struct {
+	*simplejson.Json
+}
 
 // An algorithm
-type Algorithm interface {
+type Algo interface {
 	AlgoId() string
 	Process(args Args) (err error)
 }

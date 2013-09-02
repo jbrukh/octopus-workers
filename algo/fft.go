@@ -5,6 +5,8 @@ package algo
 
 import (
 	"fmt"
+	. "github.com/jbrukh/octopus-workers/resources"
+	"io"
 )
 
 //
@@ -41,6 +43,7 @@ func (a *FftAlgo) Process(args Args) (err error) {
 	default:
 		return fmt.Errorf("missing parameter: storage=[s3|file]")
 	}
+	fmt.Printf("%v", r)
 
 	return
 }

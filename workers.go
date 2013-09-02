@@ -84,7 +84,7 @@ func worker(args *workers.Args) {
 
 	log.Printf("Starting algorithm: %s", algoId)
 
-	err = algorithm.Process(algo.Args(a))
+	err = algorithm.Process(algo.Args{a})
 	if err != nil {
 		log.Printf("An error occured while processing an algorithm, %v", err)
 	}
