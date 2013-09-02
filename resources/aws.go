@@ -53,10 +53,7 @@ func resourceUrl(bucket, resourceId string) string {
 	return fmt.Sprintf(ObfUrlFmt, bucket, resourceId)
 }
 
-// Resource will read the S3 resource into memory and
-// return the reader.
-func Resource(resourceId string) (resource io.Reader, err error) {
-	url := resourceUrl(ObfBucket, resourceId)
+func GetUrl(url string) (resource io.Reader, err error) {
 	r, err := s3util.Open(url, nil)
 	if err != nil {
 		return
@@ -71,7 +68,12 @@ func Resource(resourceId string) (resource io.Reader, err error) {
 
 	// close the remote resource
 	r.Close()
-
-	// ...
 	return buf, nil
+}
+
+// Resource will read the S3 resource into memory and
+// return the reader.
+func Resource(resourceId string) (resource io.Reader, err error) {
+	url := resourceUrl(ObfBucket, resourceId)
+	return GetUrl(url)
 }
