@@ -4,14 +4,15 @@ import (
 	"encoding/json"
 	"github.com/jonnii/go-workers"
 	"log"
+	"math/rand"
 	"time"
 )
 
 type Response struct {
-	Jid        string        `json:"jid"`
-	ClassName  string        `json:"class"`
-	EnqueuedAt int64         `json:"enqueued_at"`
-	Args       []interface{} `json:"args"`
+	Jid        string   `json:"jid"`
+	ClassName  string   `json:"class"`
+	EnqueuedAt int64    `json:"enqueued_at"`
+	Args       []string `json:"args"`
 }
 
 type MiddlewareResponder struct{}
@@ -29,11 +30,25 @@ func (l *MiddlewareResponder) Call(queue string, message *workers.Msg, next func
 			return
 		}
 
-		message := Response{}
-		message.Jid = "1234"
-		message.ClassName = "GoResponseWorker"
-		message.EnqueuedAt = time.Now().Unix()
-		message.Args = make([]interface{}, 0)
+		a1 := message.Args().GetIndex(0)
+		if a1 == nil {
+			log.Printf("Couldn't extract the first item of the args array")
+			return
+		}
+
+		analysisId, err := a1.Get("analysis_id").String()
+		if err != nil {
+			log.Print("Couldn't find a key in the worker message with name 'analysis_id'")
+			log.Print("ERR: %v", err)
+			return
+		}
+
+		message := Response{
+			randomString(20),
+			"GoResponseWorker",
+			time.Now().Unix(),
+			[]string{analysisId},
+		}
 
 		response, err := json.Marshal(message)
 		if err != nil {
@@ -44,4 +59,16 @@ func (l *MiddlewareResponder) Call(queue string, message *workers.Msg, next func
 	}()
 
 	next()
+}
+
+func randomString(l int) string {
+	bytes := make([]byte, l)
+	for i := 0; i < l; i++ {
+		bytes[i] = byte(randInt(65, 90))
+	}
+	return string(bytes)
+}
+
+func randInt(min int, max int) int {
+	return min + rand.Intn(max-min)
 }

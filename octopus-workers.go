@@ -8,7 +8,9 @@ import (
 	"github.com/jbrukh/octopus-workers/algo"
 	"github.com/jonnii/go-workers"
 	"log"
+	"math/rand"
 	"os"
+	"time"
 )
 
 // ----------------------------------------------------------------- //
@@ -25,6 +27,8 @@ const (
 )
 
 func main() {
+	rand.Seed(time.Now().UTC().UnixNano())
+
 	redisServer := os.Getenv("REDIS_PROVIDER")
 	if redisServer == "" {
 		redisServer = RedisServer
