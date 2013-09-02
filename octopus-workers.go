@@ -6,7 +6,7 @@ package main
 import (
 	"fmt"
 	"github.com/jbrukh/octopus-workers/algo"
-	"github.com/jrallison/go-workers"
+	"github.com/jonnii/go-workers"
 	"log"
 	"os"
 )
@@ -44,6 +44,7 @@ func main() {
 	})
 
 	workers.Middleware.Append(&workers.MiddlewareLogging{})
+	workers.Middleware.Append(&MiddlewareResponder{})
 
 	workers.Process(ProcessingQueue, RunOctopusWorker, Concurrency)
 	workers.Run()
@@ -70,7 +71,8 @@ func RunOctopusWorker(args *workers.Args) {
 		return
 	}
 
-	algorithm, err := algo.Provide(algoId)
+	//algorithm, err := algo.Provide(algoId)
+	algorithm, err := algo.Provide("null")
 	if err != nil {
 		log.Printf("Couldn't find algorithm with name: %s", algoId)
 		return
