@@ -50,11 +50,11 @@ func main() {
 	workers.Middleware.Append(&workers.MiddlewareLogging{})
 	workers.Middleware.Append(&MiddlewareResponder{})
 
-	workers.Process(ProcessingQueue, RunOctopusWorker, Concurrency)
+	workers.Process(ProcessingQueue, worker, Concurrency)
 	workers.Run()
 }
 
-func RunOctopusWorker(args *workers.Args) {
+func worker(args *workers.Args) {
 	log.Printf("received message: %s", args.ToJson())
 
 	a1 := args.GetIndex(0)
