@@ -5,7 +5,7 @@ package algo
 
 import (
 	"fmt"
-	"github.com/jbrukh/goavatar/formats"
+	"github.com/jbrukh/goavatar/obf"
 	. "github.com/jbrukh/octopus-workers/resources"
 	"io"
 )
@@ -45,7 +45,7 @@ func (a *FftAlgo) Process(args Args) (err error) {
 		return fmt.Errorf("missing parameter: storage=[s3|file]")
 	}
 
-	_, err = formats.NewObfReader(r)
+	_, err = obf.NewObfReader(r)
 	if err != nil {
 		return fmt.Errorf("could not get resource for processing: %v", err)
 	}
