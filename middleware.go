@@ -22,7 +22,7 @@ func (l *MiddlewareResponder) Call(queue string, message *workers.Msg, next func
 
 	log.Printf("Responding to message: %s", message.Jid())
 
-	conn := workers.Config.GetConn()
+	conn := workers.Config.Pool.Get()
 	defer conn.Close()
 
 	_, err := conn.Do("sadd", "queues", "default")
